@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.VFX;
@@ -12,7 +13,9 @@ public class Sculpture : MonoBehaviour{
 	[SerializeField]
 	private int AgeInHours = 0;
 	[SerializeField]
-	VisualEffect VFXSculpture;
+	List<VisualEffect> VFXSculptures;
+	[SerializeField]
+	TextMeshProUGUI Infos;
 
 	IEnumerator Start(){
 
@@ -20,8 +23,7 @@ public class Sculpture : MonoBehaviour{
 		Age = DateTime.Now - BirthTime;
 		AgeInHours = (int)Age.TotalHours;
 
-		VFXSculpture.SetInt("Dots", AgeInHours);
-		VFXSculpture.SendEvent("Update");
+		UpdateSculptures(AgeInHours);
 
 		// Ajouter un point à 09 de l'heure en cours ou la prochaine
 		float MinutesToWait = 0;
@@ -33,11 +35,51 @@ public class Sculpture : MonoBehaviour{
 			yield return new WaitForSeconds(MinutesToWait * 60);
 		}
 		AgeInHours ++;
+		UpdateSculptures(1);
 
 		// Ajouter un point toutes les heures
 		while(true){
 			yield return new WaitForSeconds(3600);
 			AgeInHours ++;
+			UpdateSculptures(1);
+		}
+    }
+
+    void UpdateSculptures(int DotsQuantity){
+    	for (int i=0; i<VFXSculptures.Count; i++){
+			VFXSculptures[i].SetInt("Dots", DotsQuantity);
+			VFXSculptures[i].SendEvent("Update");
+		}
+		Infos.text = DotsQuantity+" H  .  "+ (DotsQuantity*3) +" PTS";
+    }
+
+    void Update(){
+    	if(Input.GetKeyDown(KeyCode.Alpha0)){
+    		for (int i=0; i<VFXSculptures.Count; i++){
+				VFXSculptures[i].Reinit();
+			}
+    		UpdateSculptures(AgeInHours);
+		}
+
+		if(Input.GetKeyDown(KeyCode.Alpha1)){
+			for (int i=0; i<VFXSculptures.Count; i++){
+				VFXSculptures[i].Reinit();
+			}
+    		UpdateSculptures(43800);
+		}
+
+		if(Input.GetKeyDown(KeyCode.Alpha2)){
+			for (int i=0; i<VFXSculptures.Count; i++){
+				VFXSculptures[i].Reinit();
+			}
+    		UpdateSculptures(219000);
+		}
+
+		if(Input.GetKeyDown(KeyCode.Alpha3)){
+			for (int i=0; i<VFXSculptures.Count; i++){
+				VFXSculptures[i].Reinit();
+			}
+    		UpdateSculptures(876000);
 		}
     }
 }
