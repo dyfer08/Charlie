@@ -54,28 +54,28 @@ public class Sculpture : MonoBehaviour{
     }
 
     void Update(){
-    	if(Input.GetKeyDown(KeyCode.Alpha0)){
+    	if(Input.GetKeyDown(KeyCode.A)){
     		for (int i=0; i<VFXSculptures.Count; i++){
 				VFXSculptures[i].Reinit();
 			}
     		UpdateSculptures(AgeInHours);
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha1)){
+		if(Input.GetKeyDown(KeyCode.Z)){
 			for (int i=0; i<VFXSculptures.Count; i++){
 				VFXSculptures[i].Reinit();
 			}
     		UpdateSculptures(43800);
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha2)){
+		if(Input.GetKeyDown(KeyCode.E)){
 			for (int i=0; i<VFXSculptures.Count; i++){
 				VFXSculptures[i].Reinit();
 			}
     		UpdateSculptures(219000);
 		}
 
-		if(Input.GetKeyDown(KeyCode.Alpha3)){
+		if(Input.GetKeyDown(KeyCode.R)){
 			for (int i=0; i<VFXSculptures.Count; i++){
 				VFXSculptures[i].Reinit();
 			}
